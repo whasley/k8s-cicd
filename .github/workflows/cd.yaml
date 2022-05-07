@@ -72,7 +72,7 @@ jobs:
             echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV        
 
         - name: set deployment image
-        - uses: jtalk/k8s-deploy@v2
+          uses: jtalk/k8s-deploy@v2
           with:            
             images: 'whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}'
             manifests: |
