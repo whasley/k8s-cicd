@@ -84,4 +84,4 @@ jobs:
 
         - name: set deployment image
  #         run: kubectl apply -f ./k8s/deployment.yaml goserver=whasleycardoso/teste-app/teste-app:${{ steps.tagging.outputs.new_version }}
-          run: kubectl set image deployment K8S-CICD/k8s/deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
+          run: kubectl set image deployment deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
