@@ -78,8 +78,9 @@ jobs:
             manifests: |
               ./k8s/deployment.yaml
               ./k8s/service.yaml
-            strategy: canary
-            percentage: 20
+              ./k8s/nodeport.yaml
+            #strategy: canary
+            #percentage: 20
 
 
 
