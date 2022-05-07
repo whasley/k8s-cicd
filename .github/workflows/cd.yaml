@@ -52,6 +52,7 @@ jobs:
             mkdir ~/.oci
             echo "${{ secrets.OCI_CONFIG }}" > ~/.oci/config
             echo "${{ secrets.OCI_KEY_FILE }}" > ~/.oci/key.pem
+            echo "${{ secrets.OCI_TOKEN_FILE }}" > ~/.oci/token
             curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
             chmod +x install.sh
             ./install.sh --accept-all-defaults
@@ -59,6 +60,7 @@ jobs:
             exec -l $SHELL
             oci setup repair-file-permissions --file /home/runner/.oci/config
             oci setup repair-file-permissions --file /home/runner/.oci/key.pem
+            oci setup repair-file-permissions --file /home/runner/.oci/token
 
         - name: 'Install kubectl'
           run: |
