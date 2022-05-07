@@ -15,7 +15,7 @@ jobs:
           id: docker_meta
           uses: crazy-max/ghaction-docker-meta@v1
           with:
-            images: "whasleycardoso/app-k8s"
+            images: whasleycardoso/app-k8s
             tag-sha: true
 
 
@@ -39,13 +39,13 @@ jobs:
 
         - name: Build and push
           id: docker_build
-          uses: docker/build-push-action@v2
+          uses: docker/build-push-action@v3
           with:
             push: true
             context: .
             file: ./Dockerfile
             platforms: linux/amd64,linux/arm64,linux/386
-            tags: "whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}"
+            tags: whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}
 
         - name: 'Install OCI CLI'
           run: |
