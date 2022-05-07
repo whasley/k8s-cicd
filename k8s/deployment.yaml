@@ -14,6 +14,6 @@ spec:
         spec:
             containers:
                 - name: goserver
-                  image: wesleywillians/avancadev-dev-k8sgo:v2
+                  image: whasleycardoso/teste-app:v2
                   ports:
                     - containerPort: 3000
