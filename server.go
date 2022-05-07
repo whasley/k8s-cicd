@@ -9,5 +9,5 @@ func main() {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Olá mundo - Teste</h1>"))
+	w.Write([]byte("<h1>Olá mundo - Teste2</h1>"))
 }
