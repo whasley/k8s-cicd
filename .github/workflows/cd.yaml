@@ -15,7 +15,7 @@ jobs:
           id: docker_meta
           uses: crazy-max/ghaction-docker-meta@v1
           with:
-            images: ${{ secrets.DOCKERHUB_USERNAME}}/teste-app
+            images: whasleycardoso/teste-app
             tag-sha: true
 
 
@@ -45,7 +45,7 @@ jobs:
             context: .
             file: ./Dockerfile
             platforms: linux/amd64,linux/arm64,linux/386
-            tags: ${{ secrets.DOCKERHUB_USERNAME}}/teste-app:${{ steps.tagging.outputs.new_version }}
+            tags: whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
 
         - name: 'Install OCI CLI'
           run: |
