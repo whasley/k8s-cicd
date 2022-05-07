@@ -71,17 +71,18 @@ jobs:
             echo "${{ secrets.KUBECONFIG }}" > /tmp/.kube/config
             echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV        
 
-#        - uses: jtalk/k8s-deploy@v2
-#          with:            
-#            images: 'jtalk/myapp:${{ event.run_id }}'
-#            manifests: |
-#              ./k8s/deployment.yaml
-#              ./k8s/service.yaml
-#            strategy: canary
-#            percentage: 20
-
-
-
         - name: set deployment image
- #         run: kubectl apply -f ./k8s/deployment.yaml goserver=whasleycardoso/teste-app/teste-app:${{ steps.tagging.outputs.new_version }}
-          run: kubectl set image deployment deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
+        - uses: jtalk/k8s-deploy@v2
+          with:            
+            images: 'whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}'
+            manifests: |
+              ./k8s/deployment.yaml
+              ./k8s/service.yaml
+            strategy: canary
+            percentage: 20
+
+
+
+#        - name: set deployment image
+ #         run: kubectl apply -f ./k8s/deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
+#          run: kubectl set image deployment deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
