@@ -3,10 +3,10 @@ kind: Service
 metadata:
     name: goserver-service
 spec:
-    type: NodePort
+    type: LoadBalancer
     ports:
-        - port: 3000
-          targetport: 3000
-          nodeport: 80
+        - protocol: TCP
+          name: http-svc
+          port: 3000
     selector:
         app: server
