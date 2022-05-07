@@ -15,7 +15,7 @@ jobs:
           id: docker_meta
           uses: crazy-max/ghaction-docker-meta@v1
           with:
-            images: whasleycardoso/app-k8s
+            images: whasleycardoso/teste-app
             tag-sha: true
 
 
@@ -45,7 +45,7 @@ jobs:
             context: .
             file: ./Dockerfile
             platforms: linux/amd64,linux/arm64,linux/386
-            tags: whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}
+            tags: whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
 
         - name: 'Install OCI CLI'
           run: |
@@ -70,4 +70,4 @@ jobs:
             echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV        
         
         - name: set deployment image
-          run: kubectl set image deployment goserver goserver=whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}
+          run: kubectl set image deployment goserver goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
