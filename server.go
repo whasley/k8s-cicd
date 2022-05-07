@@ -20,11 +20,13 @@ func main() {
     tmpl := template.Must(template.ParseFiles("layout.html"))
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         data := TodoPageData{
-            PageTitle: "My TODO list",
+            PageTitle: "Projeto DevOps",
             Todos: []Todo{
-                {Title: "Task 1", Done: false},
-                {Title: "Task 2", Done: true},
-                {Title: "Task 3", Done: true},
+                {Title: "Git Push para o GitHub", Done: true},
+                {Title: "Login no DockerHub", Done: true},
+                {Title: "Build da imagem Docker", Done: true},
+				{Title: "Push da imagem para o Docker Hub", Done: true},
+				{Title: "Deploy da Imagem no Kubernetes", Done: true},
             },
         }
         tmpl.Execute(w, data)
