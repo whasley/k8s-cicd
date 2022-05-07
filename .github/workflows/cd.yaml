@@ -15,7 +15,7 @@ jobs:
           id: docker_meta
           uses: crazy-max/ghaction-docker-meta@v1
           with:
-            images: wesleywillians/avancadev-dev-k8sgo
+            images: whasleycardoso/app-k8s
             tag-sha: true
 
 
@@ -45,18 +45,29 @@ jobs:
             context: .
             file: ./Dockerfile
             platforms: linux/amd64,linux/arm64,linux/386
-            tags: wesleywillians/avancadev-dev-k8sgo:${{ steps.tagging.outputs.new_version }}
+            tags: whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}
 
-        - name: Install doctl
-          uses: digitalocean/action-doctl@v2
-          with:
-            token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+        - name: 'Install OCI CLI'
+          run: |
+            mkdir ~/.oci
+            echo "${{ secrets.OCI_CONFIG }}" > ~/.oci/config
+            echo "${{ secrets.OCI_KEY_FILE }}" > ~/.oci/key.pem
+            curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+            chmod +x install.sh
+            ./install.sh --accept-all-defaults
+            echo "/home/runner/bin" >> $GITHUB_PATH
+            exec -l $SHELL
+            oci setup repair-file-permissions --file /home/runner/.oci/config
+            oci setup repair-file-permissions --file /home/runner/.oci/key.pem
 
-        - name: Setup kubectl
-          uses: matootie/dokube@v1.3.2
-          with:
-            personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
-            clusterName: live-k8s
-
+        - name: 'Install kubectl'
+          run: |
+            mkdir /tmp/.kube
+            curl -L -O "https://dl.k8s.io/release/v1.22.4/bin/linux/amd64/kubectl" -o kubectl
+            chmod +x kubectl
+            mv kubectl /usr/local/bin
+            echo "${{ secrets.KUBECONFIG }}" > /tmp/.kube/config
+            echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV        
+        
         - name: set deployment image
-          run: kubectl set image deployment goserver goserver=wesleywillians/avancadev-dev-k8sgo:${{ steps.tagging.outputs.new_version }}
+          run: kubectl set image deployment goserver goserver=whasleycardoso/app-k8s:${{ steps.tagging.outputs.new_version }}
