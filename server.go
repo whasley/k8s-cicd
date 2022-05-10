@@ -20,7 +20,7 @@ func main() {
     tmpl := template.Must(template.ParseFiles("layout.html"))
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         data := TodoPageData{
-            PageTitle: "Projeto DevOps - 10/05/2022",
+            PageTitle: "Projeto DevOps - Whasley",
             Todos: []Todo{
                 {Title: "Git Push para o GitHub", Done: true},
                 {Title: "Login no DockerHub", Done: true},
