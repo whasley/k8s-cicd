@@ -48,8 +48,11 @@ jobs:
             tags: whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
 
     deploy:
+    needs: [build]
         runs-on: ubuntu-latest        
         steps:
+
+        - uses: actions/checkout@v2
 
         - name: 'Install OCI CLI'
           run: |
