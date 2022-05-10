@@ -47,6 +47,10 @@ jobs:
             platforms: linux/amd64,linux/arm64
             tags: whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
 
+    deploy:
+        runs-on: ubuntu-latest        
+        steps:
+
         - name: 'Install OCI CLI'
           run: |
             mkdir ~/.oci
