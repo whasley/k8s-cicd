@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
     name: goserver
 spec:
-    replicas: 5
+    replicas: 10
     selector:
         matchLabels:
             app: server
