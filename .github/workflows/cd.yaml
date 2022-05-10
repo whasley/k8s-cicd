@@ -78,6 +78,14 @@ jobs:
             echo "${{ secrets.KUBECONFIG }}" > /tmp/.kube/config
             echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV        
 
+
+        - name: Bump version and push tag
+          id: tagging
+          uses: mathieudutour/github-tag-action@v4.5
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
         - name: set deployment image
           uses: jtalk/k8s-deploy@v2
           with:            
