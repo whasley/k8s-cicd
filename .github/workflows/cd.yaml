@@ -96,9 +96,3 @@ jobs:
               ./k8s/nodeport.yaml
             #strategy: canary
             #percentage: 20
-
-
-
-#        - name: set deployment image
- #         run: kubectl apply -f ./k8s/deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
-#          run: kubectl set image deployment deployment.yaml goserver=whasleycardoso/teste-app:${{ steps.tagging.outputs.new_version }}
